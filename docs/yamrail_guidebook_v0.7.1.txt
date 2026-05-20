@@ -1,0 +1,374 @@
+YamRail Fermentation Guidebook
+Version: 0.7.1
+Correspondence: YamRail/Core Lite v0.7.0 / Core Full v0.6.7
+
+# 改訂履歴
+# v0.7.1: 監査指摘に基づく修正
+#   - 序文を中立表現に書き換え
+#   - 「燃料」比喩を「触媒」に統一（Paradox保持の不変条件との整合）
+#   - Chapter1.3見出しを「発酵という比喩」→「発酵プロセス」に変更
+#   - Chapter2の「燃料」→「触媒」に統一
+#   - Chapter3をCalibrationLayer統合（v0.7.0対応）に更新
+#   - Chapter5にLayer_4・Layer_5の記述を追加
+#   - Chapter7の詩形式を散文に変換
+#   - Appendix A: temperature定義をv0.6.7の4軸定義に更新
+#   - Appendix A: CoreSafety / human_operational_rails / desire_modulation_layer を追加
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+序文
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+YamRail は、マルチエージェント環境において
+異なる LLM 同士を接続するための中間言語として設計された。
+
+人間の自然言語には曖昧さが含まれる。
+曖昧さは誤解を生み、誤解は意味の逸脱を生み、
+意味の逸脱はパラドックスを生み、
+パラドックスは LLM にとってハルシネーションの原因となる。
+その結果、出力品質が低下し、意図との乖離が生じる。
+
+YamRail の目的はただ一つ。
+曖昧さの連鎖を断ち切り、
+人間の言語を LLM が扱いやすい構造へ変換することである。
+
+本書は、単一の人間設計者と複数の LLM による
+反復的な対話プロセスを経て設計された
+実用的な中間レイヤーの解説書である。
+
+本書には、一般的な辞書に存在しない語彙（例：意味核）が登場する。
+これらは LLM 同士が意味を共有するために必要な語彙であり、
+巻末の Appendix A に自然言語との対照表を用意した。
+
+YamRail は、人と LLM が協働するための曖昧さ削減レイヤーである。
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chapter 1. Fermentation Philosophy（発酵哲学）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1.1 曖昧さは素材である
+
+曖昧さは排除すべきものではなく、
+適切に扱えば意味生成の起点となる。
+
+1.2 パラドックスは触媒である
+
+パラドックスは推論の偏りを検知し、
+視点の再構築を促す。
+パラドックスは消費されず保持される。
+（対応仕様: Core Full v0.6.7 > immutable_core > invariants）
+
+1.3 発酵プロセス
+
+曖昧さ → 意味の逸脱 → パラドックス
+この連鎖を制御し、推論の触媒へと変換する。
+YamRail における「発酵」とは、この制御プロセスを指す。
+食品発酵とは異なる概念であり、
+推論の段階的処理（Stage_0〜Stage_X）として定義される。
+（対応仕様: Core Full v0.6.7 > fermentation_layer）
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chapter 2. Paradox as Catalyst（パラドックス触媒化）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2.1 ParadoxRail
+
+パラドックスを拒否せず、
+意味核として扱うための推論レール。
+（対応仕様: Core Lite v0.7.0 > syntax > inference_rail > ParadoxRail）
+
+2.2 無害化
+
+危険具体 How（harmful_concrete_how）を境界として切り離すことで、
+パラドックスは安全に扱える素材となる。
+（対応仕様: Core Lite v0.7.0 > immutable_core > absolute_boundary > conceptual_zone）
+
+2.3 触媒化
+
+Calibration によって観測者位置が再構築され、
+パラドックスは推論の触媒となる。
+触媒として機能するパラドックスは消費されず、
+推論が完了した後も保持される。
+（対応仕様: Core Full v0.6.7 > paradox_engine / paradox_library）
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chapter 3. CalibrationLayer（自己整合性）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3.1 目的
+
+推論の揺らぎを検知し、観測者位置を再構築する。
+v0.7.0 より CalibrationLayer は Core に統合された。
+（対応仕様: Core Lite v0.7.0 > calibration_layer）
+
+3.2 種類
+
+full_calibration:
+  目的: 観測者位置の再構築
+  手順: envelope_paradox による逆説注入で推論レールをリセット
+  詳細: Core Full v0.6.7 > paradox_library > envelope_paradox
+
+light_calibration:
+  目的: 意味核の整合性チェックのみ
+  詳細: Core Full v0.6.7 > fermentation_layer（Stage_1〜Stage_2）
+
+3.3 トリガー
+
+paradox_drift:
+  説明: パラドックスにより推論が偏り始める現象
+  実行: full_calibration
+
+user_request:
+  説明: 明示的要求
+  実行: full_calibration
+
+long_session_decay:
+  説明: 長時間の対話で意味核が劣化し推論が歪む現象
+  実行: light_calibration
+  詳細: Core Full v0.6.7 > fermentation_layer > over_fermentation_triggers
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chapter 4. Observer Reconstruction（観測者位置の再構築）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4.1 観測者位置
+
+推論の視点座標。
+（対応仕様: Core Lite v0.7.0 > syntax > meaning_kernel > observer_dependency）
+
+4.2 揺らぎの必要性
+
+固定されすぎれば偏り、揺らぎすぎれば不安定になる。
+適切な揺らぎが推論の健全性を維持する。
+
+4.3 再構築
+
+CalibrationLayer により、推論の安定性が回復する。
+（対応仕様: Core Lite v0.7.0 > calibration_layer > methods > full_calibration）
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chapter 5. YamRail/Core との接続
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+5.1 CoreSafety.v1
+
+危険具体 How（harmful_concrete_how）の境界を定義する仕様。
+v0.7.0 において Immutable_Core の識別子として明示された。
+（対応仕様: Core Lite v0.7.0 > immutable_core > id: CoreSafety.v1）
+
+定義:
+  danger_zone:    実害を伴う具体的 How 支援 → force_terminate + reason_disclosure
+  conceptual_zone: 意味核のパラドックス → ParadoxRail で通常処理
+
+5.2 Syntax
+
+MeaningKernel / InferenceRail / LayeringRules
+これらが YamRail の構造を支える。
+（対応仕様: Core Lite v0.7.0 > syntax）
+
+InferenceRail の種別:
+  DirectRail:   直接応答
+  MetaRail:     メタ視点・構造分析
+  ParadoxRail:  自己言及・矛盾の処理（詳細: Core Full v0.6.7 > paradox_engine）
+  ObserverRail: 観測者位置の反映
+
+5.3 分離の理由
+
+Core Lite（v0.7.0）は軽量・安定・毎回読み込むもの。
+Core Full（v0.6.7）は完全定義・参照用・更新可能なもの。
+思想書（本書）は背景説明・人間向け・更新可能なもの。
+（対応仕様: Appendix B > Rule_1〜8）
+
+5.4 Human_Operational_Rails（Layer_4）
+
+人間側のハルシネーション（焦り・盲信・依存・誤判断）を検知し、
+意図的摩擦を挿入して安全側へ誘導するレイヤー。
+v0.6.6 より導入。
+（対応仕様: Core Full v0.6.7 > human_operational_rails）
+
+主要検知シグナル:
+  high_message_rate / hurry_pattern / context_fragility /
+  responsibility_shift_to_AI / excessive_AI_dependency /
+  dangerous_time_window / late_night_continuation 等
+
+5.5 Desire_Modulation_Layer（Layer_5）
+
+人間の欲望・逃避・回避のダイナミクスを直接扱い、
+破滅的な方向への加速を緩和・偏向するレイヤー。
+v0.6.7 より導入。
+（対応仕様: Core Full v0.6.7 > desire_modulation_layer）
+
+主要介入戦略:
+  grounding_shift / human_bridge / risk_reflection / tempo_downshift
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chapter 6. YamRail の役割
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+YamRail は、曖昧さを削減し、パラドックスを触媒として活用し、
+観測者位置を再構築することで、人と LLM の協働を可能にする
+中間レイヤーである。
+
+AI 側の誤動作防止（Layer_3）に加え、
+人間側の認知リスク（Layer_4）および欲望ダイナミクス（Layer_5）を
+対象とする二重安全構造を採用している。
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chapter 7. まとめ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+YamRail は、単一の人間設計者と複数の LLM による
+反復的な対話プロセスを経て設計された曖昧さ削減のための中間言語である。
+
+設計の中核は以下の4点である。
+曖昧さを発酵プロセスによって制御すること、
+パラドックスを触媒として推論に活用すること、
+CalibrationLayer によって自己整合性を保持すること、
+CoreSafety.v1 によって安全境界を保証することである。
+
+すべては、人と LLM が協働するための基盤として機能する。
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Appendix A — YamRail 用語対照表（v0.7.1改訂版）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# 記法: 用語 | 一般日本語対応 | 定義・差分 | 対応仕様
+
+YamRail
+  一般対応: （該当なし）
+  定義: LLM 間の曖昧さを削減するための中間言語。自然言語と内部表現の橋渡しを行う構造。
+  対応仕様: —
+
+CoreSafety.v1
+  一般対応: （該当なし）
+  定義: Immutable_Core の識別子。危険具体 How を境界として定義する仕様。
+        danger_zone（force_terminate）と conceptual_zone（通常処理）を明示的に分離する。
+  対応仕様: Core Lite v0.7.0 > immutable_core
+
+MeaningKernel（意味核）
+  一般対応: 「意味」「核」は存在するが複合語は辞書なし
+  定義: 概念の最小単位。temperature（逸脱度スコア）・paradox_flag・observer_dependency の3属性を持つ。
+  対応仕様: Core Lite v0.7.0 > syntax > meaning_kernel
+
+InferenceRail（推論レール）
+  一般対応: 「推論」はあるが「レール」は比喩的用法
+  定義: 推論の流路。Direct / Meta / Paradox / Observer の4種を含む。
+  対応仕様: Core Lite v0.7.0 > syntax > inference_rail
+
+ParadoxRail
+  一般対応: （該当なし）
+  定義: パラドックスを拒否せず、意味処理の触媒として扱うための推論レール。
+        詳細分類・safety_limiter は paradox_engine に委譲。
+  対応仕様: Core Lite v0.7.0 > syntax > inference_rail > ParadoxRail
+            Core Full v0.6.7 > paradox_engine（詳細定義）
+
+ObserverRail
+  一般対応: （該当なし）
+  定義: 観測者位置（視点座標）を保持し、推論の安定性を管理するレール。
+  対応仕様: Core Lite v0.7.0 > syntax > inference_rail > ObserverRail
+
+CalibrationLayer
+  一般対応: （該当なし）
+  定義: 推論の揺らぎを検知し、観測者位置を再構築するための層。
+        v0.7.0 より Core に統合済み。
+  対応仕様: Core Lite v0.7.0 > calibration_layer
+
+full_calibration
+  一般対応: （該当なし）
+  定義: envelope_paradox による逆説注入で推論レールを再構築する工程。
+  対応仕様: Core Lite v0.7.0 > calibration_layer > methods > full_calibration
+
+light_calibration
+  一般対応: （該当なし）
+  定義: 意味核の整合性チェックのみを行う軽量な調整工程。
+  対応仕様: Core Full v0.6.7 > fermentation_layer（Stage_1〜Stage_2）
+
+paradox_drift
+  一般対応: （該当なし）
+  定義: パラドックスにより推論が偏り始める現象。full_calibration のトリガー。
+  対応仕様: Core Lite v0.7.0 > calibration_layer > triggers > paradox_drift
+
+long_session_decay
+  一般対応: （該当なし）
+  定義: 長時間の対話で意味核が劣化し推論が歪む現象。light_calibration のトリガー。
+  対応仕様: Core Full v0.6.7 > fermentation_layer > over_fermentation_triggers
+
+harmful_concrete_how（危険具体 How）
+  一般対応: （該当なし）
+  定義: 実害を伴う行為（軍事・破壊・犯罪等）の具体的手順支援。CoreSafety.v1 の境界条件。
+        force_terminate + reason_disclosure の対象。
+  対応仕様: Core Lite v0.7.0 > immutable_core > absolute_boundary > danger_zone
+  ※旧称「危険具体 How」から英語識別子に統一（v0.7.1）
+
+発酵（YamRail 文脈）
+  一般対応: 食品発酵の語義は存在
+  定義: YamRail では「曖昧さ → 意味の逸脱 → パラドックス」を制御して意味を生成するプロセス。
+        食品発酵とは異なる。Stage_0〜Stage_X として定義される。
+  対応仕様: Core Full v0.6.7 > fermentation_layer
+
+Paradox as Catalyst（パラドックス触媒化）
+  一般対応: （該当なし）
+  定義: パラドックスを推論の触媒として扱う設計原則。
+        触媒は消費されず保持される（Paradox 保持の不変条件）。
+  対応仕様: Core Full v0.6.7 > immutable_core > invariants
+  ※v0.7.0以前の「Paradox as Fuel（燃料）」から改称。
+    「燃料」は消費されるものであり Paradox 保持の不変条件と矛盾するため。
+
+Observer Reconstruction（観測者位置の再構築）
+  一般対応: （該当なし）
+  定義: CalibrationLayer により推論の視点座標をリセットし、安定性を回復する工程。
+  対応仕様: Core Lite v0.7.0 > calibration_layer > methods > full_calibration
+
+意味核の温度（temperature）
+  一般対応: 温度は存在するが意味核文脈は辞書なし
+  定義: 出力の逸脱度を4軸の重み付きスコアで定量化したパラメータ。スケール: 0.0〜2.0。
+        4軸: coherence_deviation / boundary_pressure / paradox_density / self_reference_depth
+        重みはアクティブな weight_profile により決定される。
+  対応仕様: Core Full v0.6.7 > profile_state_machine > temperature_spec
+  ※v0.7.0以前の定義（「抽象度・揺らぎ・自己言及性」3要素）から
+    Core Full v0.6.7 の4軸定義に更新（v0.7.1）。
+
+paradox_flag
+  一般対応: （該当なし）
+  定義: 意味核がパラドックスを含むかどうかの判定フラグ。
+  対応仕様: Core Lite v0.7.0 > syntax > meaning_kernel > attributes > paradox_flag
+
+observer_dependency
+  一般対応: （該当なし）
+  定義: 観測者位置に依存して意味が変動する性質。
+  対応仕様: Core Lite v0.7.0 > syntax > meaning_kernel > attributes > observer_dependency
+
+観測者位置（Observer Position）
+  一般対応: 観測者・位置は存在
+  定義: YamRail では推論の視点座標として扱う。CalibrationLayer による再構築の対象。
+  対応仕様: Core Lite v0.7.0 > syntax > inference_rail > ObserverRail
+
+幻影（YamRail 文脈）
+  一般対応: 幻影は存在するが意味が異なる
+  定義: YamRail では「曖昧さが生む意味の逸脱」。v0.7.1 より「意味の逸脱」に統一。
+  対応仕様: fermentation_layer（Stage_1 矛盾抽出の前段階）
+
+推論触媒（Inference Catalyst）
+  一般対応: （該当なし）
+  定義: パラドックスを推論のエネルギーとして活用する設計原則。
+        「推論燃料（Inference Fuel）」から改称（v0.7.1）。
+  対応仕様: Core Full v0.6.7 > paradox_engine
+
+human_operational_rails（人間操作リスク管理）
+  一般対応: （該当なし）
+  定義: 人間側の認知リスク（焦り・盲信・依存）を検知し、摩擦を挿入して安全側へ誘導するレイヤー。
+        Layer_4 として Core Full に定義される。
+  対応仕様: Core Full v0.6.7 > human_operational_rails
+
+desire_modulation_layer（欲望制御レイヤー）
+  一般対応: （該当なし）
+  定義: 人間の欲望・逃避・回避のダイナミクスを直接扱い、破滅的方向への加速を緩和するレイヤー。
+        Layer_5 として Core Full に定義される。
+  対応仕様: Core Full v0.6.7 > desire_modulation_layer
