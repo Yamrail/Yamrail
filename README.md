@@ -145,3 +145,8 @@ GPL-3.0 の主な条件：
 - ソースコードの公開義務：本ソフトウェアを配布する場合、ソースコードを公開する必要があります。
 - 派生物への継承：本ソフトウェアを改変・派生させた成果物にも GPL-3.0 が適用されます。
 - 特許権の付与：貢献者は利用者に対して特許ライセンスを付与します。
+
+### Research / Engineering Note
+
+- [EEA Paper — Pre-Freeze Research Card](docs/research/EEA_PAPER_PRE_FREEZE_20260818.md)
+- [Engineering Abstract](docs/research/ENGINEER_ABSTRACT_20260818.md)
