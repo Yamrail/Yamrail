@@ -1,6 +1,6 @@
 # YamRail — Engineering Abstract
 
-**Snapshot:** main @ 3a0d0163759f0e484d2fb4149ebaa2139bc10224  
+**Snapshot:** main @ 3a0d0163759f0e484d2fb4149ebaa2139bc10224
 **Remote:** https://github.com/Yamrail/Yamrail.git
 
 ## Abstract
@@ -48,4 +48,3 @@ and output contracts with deterministic fixtures.
 
 For the evidence table and pre-freeze decision, see
 [EEA_PAPER_PRE_FREEZE_20260818.md](EEA_PAPER_PRE_FREEZE_20260818.md).
-

@@ -2,8 +2,8 @@
 
 **Status:** PRE-FREEZE
 
-**Snapshot date:** 2026-08-18  
-**Repository:** https://github.com/Yamrail/Yamrail.git  
+**Snapshot date:** 2026-08-18
+**Repository:** https://github.com/Yamrail/Yamrail.git
 **Baseline:** main at 3a0d0163759f0e484d2fb4149ebaa2139bc10224
 
 ## Scope
@@ -103,4 +103,3 @@ output contracts.
 - No Core, package, historical document, or license text was changed.
 - No commit or push was performed.
 - This card and the companion engineering abstract are the only research additions.
-
