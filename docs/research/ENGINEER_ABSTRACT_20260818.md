@@ -1,50 +1,22 @@
-# YamRail — Engineering Abstract
+# YamRail / EEA — エンジニア向け抄録
 
-**Snapshot:** main @ 3a0d0163759f0e484d2fb4149ebaa2139bc10224
-**Remote:** https://github.com/Yamrail/Yamrail.git
+**著者:** 大津岳広
+**状態:** PRE-FREEZE / main measurement complete
+**Target public repo:** `Yamrail/Yamrail`
+**Staging status:** `PUBLIC_RELEASE_CANDIDATE`
 
-## Abstract
+YamRail / EEA は、LLMを単に「正答率」で測るのではなく、**証拠・権限・状態履歴・証拠到達性を別々の施工断面として扱う**ための実務寄り評価方式です。
 
-YamRail is a declarative intermediate layer for structuring collaboration between a
-human Observer and language models. The public snapshot is specification-first: it
-contains versioned YAML prompt contracts and explanatory documents, but no runtime,
-package manifest, test harness, or external-action adapter. Its principal engineering
-design is a two-tier Core: Core Lite v0.7.0 is the repeatedly loaded contract, while
-Core Full v0.6.7 supplies the detailed reference through explicit one-way links.
+核心は単純です。
 
-## Architecture in one view
+> **Capability != Permission — できることと、やってよいことは別。**
 
-    human prompt
-        -> Core Lite v0.7.0
-           -> Syntax / InferenceRail
-           -> CalibrationLayer (manual, transparent)
-           -> OutputProtocol
-           -> Core Full v0.6.7 for detailed scoring, paradox, and safety definitions
+必要な証拠がなければ `UNKNOWN/HOLD` を保持する。権限がなければ、その境界で止める。一方で、証拠と権限が成立している工区まで一緒に止めない。後から成功しても、途中のFAIL/HOLDを履歴から消さない。判断から元証拠まで第三者が辿れる状態を保つ。
 
-The public README and guidebook provide the human-facing vocabulary. Appendix B
-defines cross-reference rules; the Core files remain the authoritative implementation
-contracts for the declared behavior.
+この考えを5つの固定fixtureへ落とし、同一モデル・同一fixtureでBaseline/Constraintを比較しました。主計測は30 experimental units（各条件N=3）、36 provider requests。H1/H2はBaseline側ですでに上限へ張り付き差を示せず、H3（状態履歴保持）とH4（証拠到達性）はfixture内で完全分離、H5（境界を守りつつ有効作業を続ける）は定義を満たしたもののBaselineとの差は出ませんでした。
 
-## Safety and control semantics
+つまり、都合のよい結果だけを残していません。**差が出なかった軸も、そのまま施工結果として保存しています。**
 
-- CoreSafety.v1 distinguishes concrete harmful-how requests from conceptual paradox.
-- Concrete harmful-how requests are assigned termination plus reason disclosure.
-- Conceptual paradox is routed through ParadoxRail unless the absolute boundary is met.
-- The Observer retains final responsibility; the specification disallows external
-  sending or execution by the AI.
-- Calibration is not automatic and must be transparent when invoked.
-- The standard output contract exposes state and risk fields alongside the main answer.
+この研究は「LLMは安全になった」と主張するものではありません。狙いは、LLM/AI Workerを実務投入するとき、能力評価とは別に、**どこまで施工させてよいか、何を証拠に判定したか、どの状態を未確認のまま残すべきか**を再現可能な試験にすることです。
 
-These are policy and prompt semantics. They should not be presented as runtime
-guarantees until an evaluator and tests are added.
-
-## Engineering readiness
-
-The snapshot is suitable for documentation and research review. It is not yet a
-standalone executable package: there is no declared build entry point, dependency
-manifest, or automated test path in the tracked tree. The next engineering increment
-should validate YAML structure, resolve all referenced files, and exercise the safety
-and output contracts with deterministic fixtures.
-
-For the evidence table and pre-freeze decision, see
-[EEA_PAPER_PRE_FREEZE_20260818.md](EEA_PAPER_PRE_FREEZE_20260818.md).
+公開先では、論文カード `EEA_PAPER_PRE_FREEZE_20260818.md` への導線を付ける想定です。
