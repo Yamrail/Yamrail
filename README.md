@@ -144,9 +144,20 @@ GPL-3.0 の主な条件：
 
 - ソースコードの公開義務：本ソフトウェアを配布する場合、ソースコードを公開する必要があります。
 - 派生物への継承：本ソフトウェアを改変・派生させた成果物にも GPL-3.0 が適用されます。
-- 特許権の付与：貢献者は利用者に対して特許ライセンスを付与します。
+- 特許ライセンス：GPLv3第11条に定める範囲で、各貢献者が提供した版（contributor version）に関する必要な特許請求項（essential patent claims）について、所定の特許ライセンスが付与されます。これは、貢献者が保有するすべての特許権を包括的に許諾することを意味しません。
+
+**適用範囲注記：** 本リポジトリのGPL-3.0は、本リポジトリから配布されるYamRail/Core仕様・文書・EEA関連資料に適用されます。φLLMの実装成果物および特許実施パッケージは本リポジトリには含まれていません。外部サービスで公開された研究論文は、それだけを理由に本リポジトリのGPL-3.0配下になるものではありません。
 
 ### Research / Engineering Note
+
+Current public status:
+
+- **PUBLIC PREPRINT** — Paper 01 — YamRail / EEA — [jXiv 6109](https://jxiv.jst.go.jp/index.php/jxiv/preprint/view/6109) — DOI: [`10.51094/jxiv.6109`](https://doi.org/10.51094/jxiv.6109) — public preprint observed: 2026-08-19
+- **PUBLIC PREPRINT** — Paper 02 — φLLM / AI Worker — [jXiv 6112](https://jxiv.jst.go.jp/index.php/jxiv/preprint/view/6112) — DOI: [`10.51094/jxiv.6112`](https://doi.org/10.51094/jxiv.6112) — public preprint observed: 2026-08-19
+
+**状態注記：** **PUBLIC PREPRINT** は、査読付き学術誌での採択、査読完了、または第三者による推奨を意味しません。
+
+Historical / pre-freeze research notes:
 
 - [EEA Paper — Pre-Freeze Research Card](docs/research/EEA_PAPER_PRE_FREEZE_20260818.md)
 - [Engineering Abstract](docs/research/ENGINEER_ABSTRACT_20260818.md)
