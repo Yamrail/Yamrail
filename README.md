@@ -111,6 +111,7 @@ run: light_calibration
 |---|---|
 | [Fermentation Guidebook](docs/yamrail_guidebook_v0.7.1.txt) | 設計思想・各 Chapter の解説・用語対照表（Appendix A） |
 | [Appendix B](docs/yamrail_appendix_b_v0.7.1.txt) | Core と思想書の相互参照ルール（6 Rules） |
+| [Historical design record — Initial design confusion phase (2026-05-21)](docs/history/INITIAL_DESIGN_CONFUSION_20260521.md) | **HISTORICAL / SUPERSEDED / DO NOT USE AS CURRENT SPEC** |
 
 ---
 
