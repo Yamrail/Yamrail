@@ -36,16 +36,21 @@ CalibrationLayer が推論の揺らぎを検知し、観測者位置（視点座
 ```
 yamrail/
 │
-├── core/
-│   ├── yamrail_core_v0.7.0_lite.yaml   # Core Lite — 毎回読み込む軽量実行仕様
-│   └── yamrail_core_v0.6.7_full.yaml   # Core Full — 完全実行仕様・詳細定義の正典
+├── packages/
+│   └── core-engine/
+│       └── src/
+│           └── prompts/
+│               ├── yamrail_core_v0.7.0_lite.yaml   # Core Lite — 毎回読み込む軽量実行仕様
+│               └── yamrail_core_v0.6.7_full.yaml   # Core Full — 完全実行仕様・詳細定義の正典
 │
 ├── docs/
+│   ├── appendices/
+│   │   └── appendix_043_revised_specification_full.yaml
+│   ├── research/
+│   │   ├── EEA_PAPER_PRE_FREEZE_20260818.md
+│   │   └── ENGINEER_ABSTRACT_20260818.md
 │   ├── yamrail_guidebook_v0.7.1.txt    # Fermentation Guidebook — 設計思想書
-│   ├── yamrail_appendix_a_*.txt        # 用語対照表（Guidebook 内 Appendix A）
-│   ├── yamrail_appendix_b_v0.7.1.txt   # Core ↔ 思想書 相互参照ルール
-│   ├── yamrail_appendix_c_v0.7.1.txt   # 更新履歴
-│   └── yamrail_term_crossref.docx      # 用語対照表（横断参照・Word 形式）
+│   └── yamrail_appendix_b_v0.7.1.txt   # Core ↔ 思想書 相互参照ルール
 │
 └── README.md
 ```
@@ -106,8 +111,6 @@ run: light_calibration
 |---|---|
 | [Fermentation Guidebook](docs/yamrail_guidebook_v0.7.1.txt) | 設計思想・各 Chapter の解説・用語対照表（Appendix A） |
 | [Appendix B](docs/yamrail_appendix_b_v0.7.1.txt) | Core と思想書の相互参照ルール（6 Rules） |
-| [Appendix C](docs/yamrail_appendix_c_v0.7.1.txt) | 更新履歴（v0.1〜v0.7.1） |
-| [用語対照表](docs/yamrail_term_crossref.docx) | v0.6.7 仕様書 ↔ 思想書の横断参照表 |
 
 ---
 
